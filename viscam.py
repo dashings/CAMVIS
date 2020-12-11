@@ -82,11 +82,9 @@ for name, model in zip(model_names, model_instances):
     torch.cuda.empty_cache()
 
 
-#### only write into diss
-for index in range(len(images)):
-    # heatmap = cv2.applyColorMap(cv2.resize(CAMs[0], (width, height)), cv2.COLORMAP_JET)
-    result = model_outs[model_names[0]][index] * 0.3 + images[index] * 0.7
-    cv2.imwrite('cam.jpg', result)
+# #### only write into diss
+# for index in range(len(images)):
+#     cv2.imwrite("tes.jpg",(model_outs[model_names[0]][index] * 255).astype(np.uint8))
 
 
 
