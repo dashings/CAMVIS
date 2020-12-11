@@ -88,16 +88,18 @@ for name, model in zip(model_names, model_instances):
 
 
 
-###plot and save 
+####plot and save
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 20))
 axes = [ax2]
-a =model_outs["EB0"][0]
-ax1.imshow(images[0])
-ax2.imshow(model_outs["EB0"][0])
-# cv2.imwrite("tes.jpg",(model_outs["EB0"][0] * 255).astype(np.uint8))
-new_im = PIL.Image.fromarray((model_outs["EB0"][0] * 255).astype('uint8'))
-new_im.save("newAI.jpg")
-plt.show() # 图3
+for index in range(len(images)):
+    a =model_outs["EB0"][index]
+    ax1.imshow(images[index])
+    ax2.imshow(model_outs["EB0"][index])
+    # cv2.imwrite("tes.jpg",(model_outs["EB0"][0] * 255).astype(np.uint8))
+    new_im = PIL.Image.fromarray((model_outs["EB0"][index] * 255).astype('uint8'))
+    new_im.save("newAI.jpg")
+    plt.show() # 图3
+
 
 ### save as gif ，single model
 # def update(frame):
