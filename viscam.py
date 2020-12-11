@@ -25,6 +25,18 @@ from collections import OrderedDict
 
 def efficientnet(model_name='efficientnet-b0', **kwargs):
     return EfficientNet.from_pretrained(model_name).to(device)
+#     model = EfficientNet.from_pretrained(model_name)
+#     state_dict = torch.load("best_checkpoint.pth")["net"]
+
+#     from collections import OrderedDict
+#     new_state_dict = OrderedDict()
+#     for k, v in state_dict.items():
+#         name = k[7:]  # remove `module.`
+#         new_state_dict[name] = v
+#     # load params
+#     model.load_state_dict(new_state_dict)
+#     model.to(device)
+#     return model
 
 
 max_img = 1
