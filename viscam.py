@@ -46,9 +46,13 @@ path = r'D:\data\efvistest'
 interesting_categories = ['bear']
 
 images = []
+image_names = []
 for category_name in interesting_categories:
+    img_names = os.listdir(os.path.join(path,category_name))
+    image_names.extend(img_names)
     image_paths = glob.glob(f'{path}/{category_name}/*')
     category_images = list(map(lambda x: PIL.Image.open(x), image_paths[:max_img]))
+#     category_images = list(map(lambda x: PIL.Image.open(x), image_paths))
     images.extend(category_images)
 
 inputs = [Compose([Resize((224, 224)), ToTensor(), image_net_preprocessing])(x).unsqueeze(0) for x in
@@ -89,6 +93,10 @@ for name, model in zip(model_names, model_instances):
 
 
 ####plot and save
+img_save_path = "./images/output"
+if not os.path.exists(img_save_path):
+    os.mkdir(img_save_path)
+    
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 20))
 axes = [ax2]
 for index in range(len(images)):
@@ -97,7 +105,7 @@ for index in range(len(images)):
     ax2.imshow(model_outs["EB0"][index])
     # cv2.imwrite("tes.jpg",(model_outs["EB0"][0] * 255).astype(np.uint8))
     new_im = PIL.Image.fromarray((model_outs["EB0"][index] * 255).astype('uint8'))
-    new_im.save("newAI.jpg")
+    new_im.save("{}/{}_{}.jpg".format(img_save_path, image_names[index], "GCAM"))
     plt.show() # 图3
 
 
