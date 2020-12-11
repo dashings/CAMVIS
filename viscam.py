@@ -8,6 +8,7 @@ import torch
 from utils import *
 import PIL.Image
 import cv2
+import os
 
 from visualisation.core.utils import device
 from visualisation.core.utils import image_net_postprocessing
@@ -51,8 +52,8 @@ for category_name in interesting_categories:
     img_names = os.listdir(os.path.join(path,category_name))
     image_names.extend(img_names)
     image_paths = glob.glob(f'{path}/{category_name}/*')
-    category_images = list(map(lambda x: PIL.Image.open(x), image_paths[:max_img]))
-#     category_images = list(map(lambda x: PIL.Image.open(x), image_paths))
+#     category_images = list(map(lambda x: PIL.Image.open(x), image_paths[:max_img]))
+    category_images = list(map(lambda x: PIL.Image.open(x), image_paths))
     images.extend(category_images)
 
 inputs = [Compose([Resize((224, 224)), ToTensor(), image_net_preprocessing])(x).unsqueeze(0) for x in
