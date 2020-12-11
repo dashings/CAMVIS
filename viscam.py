@@ -81,6 +81,8 @@ for name, model in zip(model_names, model_instances):
     del module
     torch.cuda.empty_cache()
 
+
+#### only write into diss
 for index in range(len(images)):
     # heatmap = cv2.applyColorMap(cv2.resize(CAMs[0], (width, height)), cv2.COLORMAP_JET)
     result = model_outs[model_names[0]][index] * 0.3 + images[index] * 0.7
@@ -88,20 +90,18 @@ for index in range(len(images)):
 
 
 
-
-
+###plot and save 
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 20))
 axes = [ax2]
 a =model_outs["EB0"][0]
 ax1.imshow(images[0])
 ax2.imshow(model_outs["EB0"][0])
 # cv2.imwrite("tes.jpg",(model_outs["EB0"][0] * 255).astype(np.uint8))
-
 new_im = PIL.Image.fromarray((model_outs["EB0"][0] * 255).astype('uint8'))
 new_im.save("newAI.jpg")
-
 plt.show() # 图3
 
+### save as gif ，single model
 # def update(frame):
 #     all_ax = []
 #     ax1.set_yticklabels([])
@@ -124,7 +124,8 @@ plt.show() # 图3
 # ani.save('./my_arch.gif', writer='imagemagick')
 
 
-# create a figure with two subplots
+#### multiple models compare
+#### create a figure with two subplots
 # fig, (ax1, ax2, ax3, ax4, ax5) = plt.subplots(1, 5, figsize=(20, 20))
 # axes = [ax2, ax3, ax4, ax5]
 #
