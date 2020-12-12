@@ -26,7 +26,7 @@ from collections import OrderedDict
 
 def efficientnet(model_name='efficientnet-b0', **kwargs):
     return EfficientNet.from_pretrained(model_name).to(device)
-#     model = EfficientNet.from_pretrained(model_name)
+#     model = EfficientNet.from_pretrained(model_name,num_classes=2)
 #     state_dict = torch.load("best_checkpoint.pth")["net"]
 
 #     from collections import OrderedDict
